@@ -8,23 +8,39 @@
     <script src="https://unpkg.com/htmx.org@1.5.0"></script>
 </head>
 <body>
-    <h1>Sketches</h1>
-    <button hx-post="/gray_scale" hx-trigger="click" hx-target="#response">Gray Scale Image</button>
-    <button hx-post="/canny" hx-trigger="click" hx-target="#response">Canny Edge Detection</button>
-    <button hx-post="/gaussian" hx-trigger="click" hx-target="#response">Gaussian Image</button>
-    <button hx-post="/bilateral" hx-trigger="click" hx-target="#response">Bilateral Image</button>
-    <button hx-post="/median" hx-trigger="click" hx-target="#response">Median Image</button>
-    <button hx-post="/sharpening" hx-trigger="click" hx-target="#response">Sharpening Image</button>
-    <button hx-post="/sobel_edge" hx-trigger="click" hx-target="#response">Sobel Edge Detection</button>
-    <div class="card">
-        <form id="uploadForm" hx-post="/upload-image" hx-encoding="multipart/form-data" hx-trigger="submit" hx-target="#response">
-            <input type="file" name="image" placeholder="Upload Image" required class="input_image">
-            <button class="btn" type="submit">Upload Image</button>
-        </form>
-        <div id="response" class="response">
-
+   
+    <main>
+       
+        <div class="control-box">
+            <h4>Control-Box</h4>
+            <button class="filter-btn first" hx-post="/gray_scale" hx-trigger="click" hx-target="#response">Gray Scale Image</button>
+            <button  class="filter-btn" hx-post="/canny" hx-trigger="click" hx-target="#response">Canny Edge Detection</button>
+            <button  class="filter-btn" hx-post="/gaussian" hx-trigger="click" hx-target="#response">Gaussian Image</button>
+            <button  class="filter-btn" hx-post="/bilateral" hx-trigger="click" hx-target="#response">Bilateral Image</button>
+            <button  class="filter-btn" hx-post="/median" hx-trigger="click" hx-target="#response">Median Image</button>
+            <button  class="filter-btn"  hx-post="/sharpening" hx-trigger="click" hx-target="#response">Sharpening Image</button>
+            <button  class="filter-btn" hx-post="/sobel_edge" hx-trigger="click" hx-target="#response">Sobel Edge Detection</button>
+            <hr>
+            <button  class="filter-btn" hx-post="/face_detect" hx-trigger="click" hx-target="#response">Face Detection</button>
+            <button  class="filter-btn" hx-post="/eye_detect" hx-trigger="click" hx-target="#response">Eyes Detection</button>
+            <button  class="filter-btn" hx-post="/nose_detect" hx-trigger="click" hx-target="#response">Nose Detection</button>
+            <button  class="filter-btn" hx-post="/mouth_detect" hx-trigger="click" hx-target="#response">Mouth Detection</button>
+        
         </div>
-    </div>
+        
+        <div class="card">
+            <h3>Fun with Image Pixels using OpenCV</h3>
+            <form id="uploadForm" hx-post="/upload-image" hx-encoding="multipart/form-data" hx-trigger="submit" hx-target="#response">
+                <input type="file" name="image" placeholder="Upload Image" required class="input_image">
+                <button class="btn" type="submit">Upload Image</button>
+            </form>
+            <div id="response" >
+    
+            </div>
+        </div>
+        <img src="static/image/logo.png" height="150px" class="logo1" width="150px" alt="">
+        <img src="static/image/logo.png" height="150px" class="logo" width="150px" alt="">
+    </main>
    
    
     <script>
@@ -32,7 +48,7 @@
             if (evt.detail.target.id === 'response') {
                 const data = JSON.parse(evt.detail.xhr.responseText);
                 if (data.image) {
-                    document.getElementById('response').innerHTML = `<img src="data:image/jpeg;base64,${data.image}" alt="Grayscale Image">`;
+                    document.getElementById('response').innerHTML = `<div class="response"><img src="data:image/jpeg;base64,${data.image}" alt="Grayscale Image"> <span>${data.message}</span></div>`;
                 }
             }
         });

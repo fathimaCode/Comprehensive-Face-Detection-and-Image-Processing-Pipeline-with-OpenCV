@@ -35,11 +35,11 @@ body{
 position: absolute;
 top: 20;
 margin: 10px;
-height: 400px;
+height: 350px;
 width: 90%;
 }
 .response img{
-    object-fit: cover;
+    object-fit: fit;
     height: 100%;
     width: 100%;
 }
@@ -51,3 +51,71 @@ width: 90%;
     color: var(--white-color);
     cursor: pointer;
 }
+main{
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.control-box{
+    margin: 15px;
+    background-color: var(--white-color);
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+h3,h4{
+    padding: 10px;
+    text-align: center;
+}
+h4{
+    position: fixed;
+    
+}
+span{
+    text-align: center;
+    font-weight: bold;
+}
+.filter-btn{
+    border: none;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+    
+}
+.filter-btn:hover{
+    background-color: var(--violet-color);
+    color: var(--white-color);
+}
+.filter-btn.first{
+    margin-top: 40px;
+}
+main .logo,.logo1{
+    position: absolute;
+    
+    animation-duration: 3s;
+  animation-name: bounce;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.logo1{
+    top: 300px;
+    right: 280px;
+}
+.logo{
+    top: 300px;
+    left: 80px;
+}
+@keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    70% {
+        transform: translateX(60px);
+      }
+    100% {
+      transform: translateY(0);
+    }
+  }

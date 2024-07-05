@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketches with Python</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="https://unpkg.com/htmx.org@1.5.0"></script>
+</head>
+<body>
+    <h1>Sketches</h1>
+    <button hx-post="/gray_scale" hx-trigger="click" hx-target="#response">Gray Scale Image</button>
+    <button hx-post="/canny" hx-trigger="click" hx-target="#response">Canny Edge Detection</button>
+    <button hx-post="/gaussian" hx-trigger="click" hx-target="#response">Gaussian Image</button>
+    <button hx-post="/bilateral" hx-trigger="click" hx-target="#response">Bilateral Image</button>
+    <button hx-post="/median" hx-trigger="click" hx-target="#response">Median Image</button>
+    <button hx-post="/sharpening" hx-trigger="click" hx-target="#response">Sharpening Image</button>
+    <button hx-post="/sobel_edge" hx-trigger="click" hx-target="#response">Sobel Edge Detection</button>
+    <div class="card">
+        <form id="uploadForm" hx-post="/upload-image" hx-encoding="multipart/form-data" hx-trigger="submit" hx-target="#response">
+            <input type="file" name="image" placeholder="Upload Image" required class="input_image">
+            <button class="btn" type="submit">Upload Image</button>
+        </form>
+        <div id="response" class="response">
+
+        </div>
+    </div>
+   
+   
+    <script>
+        document.body.addEventListener('htmx:afterRequest', function(evt) {
+            if (evt.detail.target.id === 'response') {
+                const data = JSON.parse(evt.detail.xhr.responseText);
+                if (data.image) {
+                    document.getElementById('response').innerHTML = `<img src="data:image/jpeg;base64,${data.image}" alt="Grayscale Image">`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
